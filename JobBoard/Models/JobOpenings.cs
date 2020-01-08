@@ -1,56 +1,42 @@
+using System.Collections.Generic;
+
 namespace JobPost.Models
 {
     public class JobOpening
     {
-        private Contact[] list;
-        private int size;
-        public JobOpening()
-        {
-            list = new Contact[100];
-            this.size = 0;
-        }
-
-        public void AddContact(Contact newContact)
-        {
-            list[size] = newContact;
-            size++;
-        }
-
-        public void RemoveContactByIndex(int index)
-        {
-            // Remove an element and the right side of the element shift to left.
-            if (index >= 0 && index <= this.size)
-            {
-                for (int idx = index; idx < this.size -1; idx++)
-                {
-                    list[idx] = list[idx + 1];
-                }
-                this.size--;
-            }
-        }
-
-        public int GetSize()
-        {
-            return this.size;
-        }
-
-        public Contact GetContact(int index)
-        {
-            if(index >= 0 && index <= this.size)
-            {
-                return list[index];
-            }
-            return null;
-        }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Contact ContactList { get; set; }
+        private static List<JobOpening> _instances = new List<JobOpening> {};
         
-        public string ToString()
+        public JobOpening(string title, string description, Contact contact)
         {
-            string output = "";
-            for(int index = 0; index < this.size; index++)
-            {
-                output += list[index].ToString() + "\n";
-            }
-            return output;
+            Title = title;
+            Description = description;
+            ContactList = contact;
+            _instances.Add(this);
         }
+
+        public static List<JobOpening> GetAll()
+        {
+            return _instances;
+        }
+
+        public static void ClearAll()
+        {
+            _instances.Clear();
+        }
+
+        // public void RemoveContactByIndex(int index)
+        // {
+        //     // Remove an element and the right side of the element shift to left.
+        //     if (index >= 0 && index <= this.size)
+        //     {
+        //         for (int idx = index; idx < this.size -1; idx++)
+        //         {
+        //             list[idx] = list[idx + 1];
+        //         }
+        //     }
+        // }
     }
 }

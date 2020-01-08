@@ -6,13 +6,11 @@ namespace JobPost.Controllers
 {
     public class JobController : Controller
     {
-        JobOpening myJobs = new JobOpening();
         [HttpGet("/jobs")]
         public ActionResult Index()
         {
-            // JobOpening myJobs = new JobOpening();
-            //Contact output = myJobs.GetContact(0);
-            return View(myJobs);
+            List<JobOpening> allItems = JobOpening.GetAll();
+            return View(allItems);
         }
 
         [HttpGet("/jobs/new")]
@@ -22,10 +20,9 @@ namespace JobPost.Controllers
         }
 
         [HttpPost("/jobs")]
-        public ActionResult Create(string name, string email, string phone)
+        public ActionResult Create(string title, string description, string name, string email, string phone)
         {
-            Contact myContact = new Contact(name, email, phone);
-            myJobs.AddContact(myContact);
+            JobOpening myJob = new JobOpening(title, description, new Contact(name, email, phone));
             return RedirectToAction("Index");
         }
     }
