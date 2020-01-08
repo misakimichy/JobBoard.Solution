@@ -37,7 +37,7 @@ $ dotnet restore && dotnet test
  misaki.koonce@gmail.com
 
 ## Technologies Used
-_Git, GitHub, Bootstrap, C# and ASP.NET Core MVP
+_Git, GitHub, Bootstrap, C# and ASP.NET Core MVC
 
 ## License
 Copyright © 2020 under the MIT License
